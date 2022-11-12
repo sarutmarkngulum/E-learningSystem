@@ -7,6 +7,13 @@
   <body>
       <%- include ('../layout') %>
       <div class="container">
+            <% if(locals.errors){ %>
+                  <ul class="alert alert-danger">
+                    <% Object.values(errors).forEach(function(error){%>
+                            <li><%= error.msg %></li>
+                    <%})%>
+                  </ul>
+                <%}%>
             <h2 align="center">Register Form</h2>
             <form class="form-group" action="/users/register" method="post">
                   <div class="form-group">
