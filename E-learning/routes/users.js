@@ -33,8 +33,7 @@ router.post('/login', passport.authenticate('local', {
 }),
   function (req, res) {
     var usertype = req.user.type;
-    res.redirect('/');
-    // res.redirect('/'+usertype+'s/classes');
+    res.redirect('/'+usertype+'s/classes');
   });
 
 passport.serializeUser(function (user, done) {

@@ -17,6 +17,8 @@ var LocalStrategy=require('passport-local').Strategy;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var instructorsRouter = require('./routes/instructors');
+var studentsRouter = require('./routes/students');
 
 var app = express();
 
@@ -49,6 +51,8 @@ app.get('*',function(req,res,next){
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/instructors', instructorsRouter);
+app.use('/students', studentsRouter);
 
 
 module.exports = app;
