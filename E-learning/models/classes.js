@@ -26,3 +26,7 @@ var Classes=module.exports=mongoose.model('classes',classSchema)
 module.exports.getClasses=function(callback,limit){
       Classes.find(callback).limit(limit)
 }
+
+module.exports.saveNewClass=function(newClass,callback){
+  newClass.save(callback);
+}

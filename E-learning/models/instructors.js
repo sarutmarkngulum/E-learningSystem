@@ -23,6 +23,15 @@ var instructorSchema = mongoose.Schema({
   email: {
     type: String
   },
+  classes: [{
+    class_id: {
+      type: String
+    },
+    class_title: {
+      type: String
+    }
+  }]
+    
 });
 
 var Instructor = module.exports = mongoose.model('instructors', instructorSchema)
