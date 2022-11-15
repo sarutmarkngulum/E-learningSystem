@@ -20,13 +20,21 @@ router.get('/login', function (req, res, next) {
   res.render('users/login');
 });
 
+router.get('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
+});
+
 router.post('/login', passport.authenticate('local', {
   failureRedirect: '/users/login',
   failureFlash: true
 }),
   function (req, res) {
-    req.flash("success", "ลงชื่อเข้าใช้เรียบร้อยแล้ว");
+    var usertype = req.user.type;
     res.redirect('/');
+    // res.redirect('/'+usertype+'s/classes');
   });
 
 passport.serializeUser(function (user, done) {
@@ -39,13 +47,13 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-passport.use(new LocalStrategy(function (username, password, done) {
-  User.getUserByName(username, function (err, user) {
+passport.use(new LocalStrategy(function(username, password, done) {
+  User.getUserByName(username, function(err, user) {
     if (err) throw error;
     if (!user) {
-      return done(null, false);
+        return done(null, false);
     }
-    User.comparePassword(password, user.password, function (err, isMatch) {
+    User.comparePassword(password, user.password, function(err, isMatch) {
       if (err) return err;
       if (isMatch) {
         return done(null, user);
@@ -54,7 +62,7 @@ passport.use(new LocalStrategy(function (username, password, done) {
       }
     });
   });
-}))
+}));
 
 router.post('/register', [
   check('email', 'กรุณาป้อนอีเมล').isEmail(),

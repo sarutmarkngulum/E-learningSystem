@@ -20,20 +20,18 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-
-
 app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
-
-app.use(require('connect-flash')());
 
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
 }))
+app.use(passport.initialize());
+app.use(passport.session());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
