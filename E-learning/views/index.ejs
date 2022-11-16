@@ -18,7 +18,8 @@
         <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
       </p>
     </div>
-      <h3 align="center">คอร์สเรียน</h3>
+      <% if(locals.user) {%>
+        <h3 align="center">คอร์สเรียน</h3>
       <% if(locals.classes){ %>
       <div class="row">
       <% Object.values(classes).forEach(function(classed){%>
@@ -35,6 +36,7 @@
         <%})%>
       </div> 
     <%}%>
+      <% } %>  
   </div>
   </body>
 </html>

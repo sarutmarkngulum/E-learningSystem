@@ -10,4 +10,9 @@ router.get('/classes', function(req, res, next) {
     });
   });
 
+router.get('/classes/:id/lesson/new', function(req, res, next) {
+   res.render('instructors/newlesson',{class_id:req.params.id})
+});
+
+
 module.exports = router;

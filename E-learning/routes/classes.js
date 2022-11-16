@@ -16,7 +16,15 @@ router.post('/register',function(req,res,next){
         description:description,
         instructor:instructor,
      })
-    Classes.saveNewClass(newClass,function(err,result){
+     info=[];
+     info["instructor_user"]=req.user.username
+     info["class_id"]=class_id;
+     info["class_title"]=class_name;
+    
+    Classes.saveNewClass(newClass,function(err,student){
+        if(err) throw err;
+    })
+    Instructor.register(info,function(err,result){
         if(err) throw err;
     })
     res.location('/instructors/classes')
