@@ -19,7 +19,18 @@ var classSchema=mongoose.Schema({
     },
     instructor:{
       type:String
-    }  
+    },
+    lesson: [{
+      lesson_number: {
+        type: Number
+      },
+      lesson_title: {
+        type: String
+      },
+      lesson_body: {
+        type: String
+      }
+    }]  
 });
 var Classes=module.exports=mongoose.model('classes',classSchema)
 
