@@ -14,5 +14,17 @@ router.get('/classes/:id/lesson/new', function(req, res, next) {
    res.render('instructors/newlesson',{class_id:req.params.id})
 });
 
+router.post('/classes/:id/lesson/new', function(req, res, next) {
+   info=[];
+   info["lesson_number"]=req.body.lesson_number;
+   info["lesson_title"]=req.body.lesson_title;
+   info["lesson_body"]=req.body.lesson_body;
+   info["class_id"]=req.params.id
+   Classes.addLesson(info,function(err,lesson){
+    if(err) throw err;
+   })
+   res.redirect('/instructors/classes');
+});
+
 
 module.exports = router;
