@@ -29,7 +29,12 @@
                   <h5 class="card-title"><%= classed.title  %> </h5>
                   <h6 class="card-subtitle mb-2 text-muted">ผู้สอน : <%= classed.instructor %></h6>
                   <p class="card-text"><%= classed.description  %></p>
-                  <a href="#" class="btn btn-primary">เข้าเรียน</a>
+                  <form action="/students/classes/register" method="post">
+                    <input type="hidden" name="student_id" value="<%= user._id %>">
+                    <input type="hidden" name="class_id" value="<%= classed.class_id %>">
+                    <input type="hidden" name="class_title" value="<%= classed.title %>">
+                    <input type="submit" class="btn btn-primary" value="เข้าเรียน">
+                  </form>
                 </div>
               </div> 
             </div>
