@@ -35,6 +35,14 @@ module.exports.getClasses=function(callback,limit){
       Classes.find(callback).limit(limit)
 }
 
+module.exports.getClassID=function(class_id,callback){
+  var query={
+      class_id:class_id
+  }
+  Classes.findOne(query,callback);
+}
+
+
 module.exports.saveNewClass=function(newClass,callback){
   newClass.save(callback);
 }
@@ -62,3 +70,4 @@ module.exports.addLesson=function(info,callback){
       upsert:true
     },callback)
 }
+

@@ -5,7 +5,7 @@ var Classes=require('../models/classes');
 /* GET home page. */
 
 router.post('/register',function(req,res,next){
-    var class_id=req.body.class_id;
+     var class_id=req.body.class_id;
      var class_name=req.body.class_name;
      var description=req.body.description;
      var instructor=req.body.instructor;
@@ -20,7 +20,7 @@ router.post('/register',function(req,res,next){
      info["instructor_user"]=req.user.username
      info["class_id"]=class_id;
      info["class_title"]=class_name;
-    
+
     Classes.saveNewClass(newClass,function(err,student){
         if(err) throw err;
     })
@@ -30,5 +30,23 @@ router.post('/register',function(req,res,next){
     res.location('/instructors/classes')
     res.redirect('/instructors/classes')
 })
+
+router.get('/:id/lesson',function(req,res,next){
+    Classes.getClassID([req.params.id],function(err,className){
+        res.render('classes/viewlesson',{className:className})
+    })
+})
+
+router.get('/:id/lesson/:lesson_id',function(req,res,next){
+    Classes.getClassID([req.params.id],function(err,className){
+           var lesson; //1
+           for (var i = 0; i < className.lesson.length; i++) {
+                 if(className.lesson[i].lesson_number == req.params.lesson_id){
+                     lesson=className.lesson[i];
+                 }
+           }
+           res.render('classes/lesson',{className:className,lesson:lesson})
+    });
+});
 
 module.exports = router;
