@@ -11,11 +11,21 @@ router.get('/classes', function(req, res, next) {
 });
 
 router.post('/classes/register',function(req,res,next){
-  var student_id=req.body.student_id;
+  var student_username=req.body.student_username;
   var class_id=req.body.class_id;
-  var class_title=req.body.title;
+  var class_title=req.body.class_title;
 
-  console.log(student_id)
-})
+  info=[];
+  info["student_user"]=student_username;
+  info["class_id"]=class_id;
+  info["class_title"]=class_title;
+
+  Student.register(info,function(err,student){
+         if(err) throw err;
+  });
+  res.location('/students/classes');
+  res.redirect('/students/classes');
+});
+
 
 module.exports = router;
